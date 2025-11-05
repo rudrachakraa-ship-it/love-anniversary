@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Anniversary — Mr. Tom ❤️ Jerry</title>
+  <style>
+    :root{--bg:#0f1023;--card:#111226;--accent:#ff6b9a;--muted:#c8c8d6}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:var(--muted);background:linear-gradient(180deg,#0b0c18 0%, #101225 100%);}
+    .center{display:flex;align-items:center;justify-content:center}
+
+    /* container */
+    .page{min-height:100vh;padding:32px}
+    .card{max-width:980px;margin:0 auto;background:radial-gradient(1200px 400px at 10% 10%, rgba(255,107,154,0.06), transparent 10%), rgba(255,255,255,0.02);border-radius:20px;padding:28px;box-shadow:0 8px 40px rgba(2,6,23,0.6);overflow:hidden}
+
+    header{display:flex;gap:16px;align-items:center}
+    .logo{width:70px;height:70px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#ffb6d5);display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:22px}
+    h1{margin:0;font-size:28px;line-height:1.05;color:#fff}
+    p.lead{margin:6px 0 0;color:#e6e6f0}
+
+    /* intro modal */
+    .intro{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,2,6,0.72), rgba(2,2,6,0.9));backdrop-filter: blur(3px);display:flex;align-items:center;justify-content:center;z-index:60}
+    .intro-box{background:linear-gradient(180deg,#161623 0%, #0f1020 100%);border-radius:16px;padding:30px;max-width:720px;text-align:center;box-shadow:0 12px 60px rgba(0,0,0,0.6)}
+    .intro h2{color:white;margin:0 0 8px}
+    .intro p{color:#d5d5e6;margin:0 0 18px}
+    .btn{background:var(--accent);border:none;padding:12px 18px;border-radius:12px;color:white;font-weight:600;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+
+    /* hearts */
+    .hearts{position:fixed;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:hidden;z-index:10}
+    .heart{position:absolute;width:18px;height:18px;transform:rotate(-45deg);background:var(--accent);opacity:0.95;border-radius:4px}
+    .heart:before,.heart:after{content:'';position:absolute;background:var(--accent);border-radius:50%;}
+    .heart:before{width:18px;height:18px;top:-9px;left:0}
+    .heart:after{width:18px;height:18px;left:9px;top:0}
+
+    /* main layout */
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:18px}
+    .section{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px}
+    .gallery{display:flex;gap:10px;flex-wrap:wrap}
+    .gallery img{width:calc(50% - 5px);border-radius:10px;object-fit:cover;height:140px}
+
+    /* timeline */
+    .timeline{display:flex;flex-direction:column;gap:12px}
+    .event{display:flex;gap:12px;align-items:flex-start}
+    .event .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:6px}
+    .event .content{background:rgba(255,255,255,0.02);padding:10px;border-radius:10px}
+    .event .date{font-size:12px;color:#bdbdd0}
+
+    /* message box */
+    textarea{width:100%;min-height:120px;padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#eaeaff}
+
+    footer{margin-top:16px;text-align:center;color:#bfbfd7;font-size:14px}
+
+    /* responsive */
+    @media (max-width:900px){.grid{grid-template-columns:1fr} .gallery img{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="page">
+    <div class="card">
+      <header>
+        <div class="logo">T♡J</div>
+        <div>
+          <h1>Happy Anniversary — Mr. Tom ❤️ Jerry</h1>
+          <p class="lead">A special page made by Mr. Tom for Jerry. Click "Open" to start the surprise.</p>
+        </div>
+      </header>
+
+      <div class="grid">
+        <main class="section">
+          <h3>Our Story</h3>
+          <div class="timeline" id="timeline">
+            <!-- timeline items inserted by JS -->
+          </div>
+
+          <h3 style="margin-top:18px">Memories</h3>
+          <div class="gallery" id="gallery">
+            <!-- image placeholders -->
+            <img src="images/photo1.jpg" alt="photo1" onerror="this.style.opacity=.35;this.style.filter='grayscale(30%)';this.title='Replace images/photo1.jpg in your repo'">
+            <img src="images/photo2.jpg" alt="photo2" onerror="this.style.opacity=.35;this.style.filter='grayscale(30%)';this.title='Replace images/photo2.jpg in your repo'">
+            <img src="images/photo3.jpg" alt="photo3" onerror="this.style.opacity=.35;this.style.filter='grayscale(30%)';this.title='Replace images/photo3.jpg in your repo'">
+            <img src="images/photo4.jpg" alt="photo4" onerror="this.style.opacity=.35;this.style.filter='grayscale(30%)';this.title='Replace images/photo4.jpg in your repo'">
+          </div>
+
+          <h3 style="margin-top:18px">A Personal Message</h3>
+          <textarea id="message">Dear Jerry,\n\nHappy Anniversary! Every day with you is my favorite day. Thank you for being mine. — Mr. Tom</textarea>
+
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn" id="copyMsg">Copy Message</button>
+            <button class="btn ghost" id="download">Download as .txt</button>
+          </div>
+        </main>
+
+        <aside class="section">
+          <div style="text-align:center">
+            <h2 id="years">X years</h2>
+            <p class="date">Anniversary Date: <strong id="annDate">--</strong></p>
+            <div style="margin-top:14px">
+              <button class="btn" id="playBtn">Play Music</button>
+              <button class="btn ghost" id="openBtn">Open Surprise</button>
+            </div>
+          </div>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+          <h4>Quick tips</h4>
+          <ul style="padding-left:18px;color:#d9d9ee">
+            <li>Replace <code>images/*.jpg</code> with your photos in the repo.</li>
+            <li>Replace <code>assets/music.mp3</code> with a romantic track (or a link).</li>
+            <li>Customize the message and timeline in <code>index.html</code>.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <footer>Made with ❤️ by Mr. Tom — sent to Jerry</footer>
+    </div>
+  </div>
+
+  <!-- intro modal -->
+  <div class="intro" id="intro">
+    <div class="intro-box">
+      <h2>Happy Anniversary, Jerry 💖</h2>
+      <p>Mr. Tom has prepared a little surprise. Click "Open Surprise" to begin — sound will play if available.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+        <button class="btn" id="introOpen">Open Surprise</button>
+        <button class="btn ghost" id="introSkip">View without sound</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop preload="none">
+    <!-- Put a file at assets/music.mp3 in your repo OR replace the src with a full URL -->
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // --- Configuration (edit these values in the file) ---
+    const PERSON_FROM = 'Mr. Tom';
+    const PERSON_TO = 'Jerry';
+    const ANNIVERSARY_DATE = '2025-11-05'; // yyyy-mm-dd -> update to desired date
+    const TIMELINE = [
+      {date:'2020-06-12', title:'First Met', text:'We met at a coffee shop and talked for hours.'},
+      {date:'2021-02-14', title:'First Valentine', text:'A small surprise that became a big memory.'},
+      {date:'2023-09-01', title:'Travel Together', text:'Our trip where we laughed non-stop.'}
+    ];
+
+    // Insert personalized header
+    document.querySelector('h1').innerText = `Happy Anniversary — ${PERSON_FROM} ❤️ ${PERSON_TO}`;
+    document.querySelector('.lead').innerText = `A special page made by ${PERSON_FROM} for ${PERSON_TO}. Click "Open" to start the surprise.`;
+    document.querySelector('footer').innerText = `Made with ❤️ by ${PERSON_FROM} — sent to ${PERSON_TO}`;
+
+    // timeline render
+    const tRoot = document.getElementById('timeline');
+    TIMELINE.forEach(ev=>{
+      const el = document.createElement('div'); el.className='event';
+      el.innerHTML = `<div class="dot"></div><div class="content"><div style=\"font-weight:700;color:#fff\">${ev.title}</div><div class='date'>${ev.date}</div><div style='margin-top:6px;font-size:14px'>${ev.text}</div></div>`;
+      tRoot.appendChild(el);
+    });
+
+    // gallery note: images are placeholders; replace in repo
+
+    // years calc
+    function yearsBetween(a,b){const A=new Date(a),B=new Date(b);let yrs=B.getFullYear()-A.getFullYear();const m=B.getMonth()-A.getMonth();if(m<0 || (m===0 && B.getDate()<A.getDate()))yrs--;return yrs}
+    const today = new Date().toISOString().slice(0,10);
+    document.getElementById('annDate').innerText = ANNIVERSARY_DATE;
+    document.getElementById('years').innerText = yearsBetween(ANNIVERSARY_DATE, today)>=0 ? yearsBetween(ANNIVERSARY_DATE, today)+' years together' : 'Counting the days...';
+
+    // music control
+    const audio = document.getElementById('bgMusic');
+    const playBtn = document.getElementById('playBtn');
+    playBtn.addEventListener('click', ()=>{if(audio.paused){audio.play().catch(()=>alert('Browser blocked autoplay — press "Play Music" again.'));playBtn.innerText='Pause Music'}else{audio.pause();playBtn.innerText='Play Music'}});
+
+    // intro modal
+    const intro = document.getElementById('intro');
+    document.getElementById('introOpen').addEventListener('click', ()=>{intro.style.display='none';audio.play().catch(()=>{});});
+    document.getElementById('introSkip').addEventListener('click', ()=>{intro.style.display='none';});
+    document.getElementById('openBtn').addEventListener('click', ()=>{intro.style.display='none';audio.play().catch(()=>{});});
+
+    // copy message
+    document.getElementById('copyMsg').addEventListener('click', ()=>{
+      navigator.clipboard.writeText(document.getElementById('message').value).then(()=>alert('Message copied to clipboard'));
+    });
+
+    // download as txt
+    document.getElementById('download').addEventListener('click', ()=>{
+      const blob = new Blob([document.getElementById('message').value],{type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download=`message-to-${PERSON_TO.replace(/\s+/g,'_')}.txt`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // hearts animation
+    const heartsRoot = document.getElementById('hearts');
+    function spawnHeart(){const h=document.createElement('div');h.className='heart';
+      const size = 10+Math.random()*28; h.style.width=size+'px'; h.style.height=size+'px'; h.style.left=(Math.random()*100)+'%';
+      h.style.top = (80+Math.random()*20)+'%'; h.style.opacity=0.9; heartsRoot.appendChild(h);
+      const rise = 2000+Math.random()*5000; h.animate([{transform:'translateY(0) rotate(-45deg) scale(1)' , opacity:1},{transform:'translateY(-800px) rotate(-25deg) scale(.6)', opacity:0}],{duration:rise,iterations:1,easing:'ease-out'});
+      setTimeout(()=>{h.remove()}, rise+50);
+    }
+    setInterval(spawnHeart, 700);
+
+    // small accessibility: escape to close intro
+    document.addEventListener('keydown', (e)=>{if(e.key==='Escape') intro.style.display='none'});
+  </script>
+</body>
+</html>
